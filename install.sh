@@ -29,6 +29,7 @@ symlink aliases.sh   aliases.sh
 symlink p10k.zsh     .p10k.zsh
 symlink gitconfig    .gitconfig
 symlink tmux.conf    .tmux.conf
+symlink inputrc      .inputrc
 
 # ── Oh My Zsh ─────────────────────────────────────────────────────────────────
 
@@ -67,7 +68,9 @@ install_plugin() {
 install_plugin zsh-autosuggestions      https://github.com/zsh-users/zsh-autosuggestions
 install_plugin zsh-syntax-highlighting  https://github.com/zsh-users/zsh-syntax-highlighting
 install_plugin zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search
+install_plugin zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search
 install_plugin you-should-use           https://github.com/MichaelAquilina/zsh-you-should-use
+install_plugin zsh-fzf-tab              https://github.com/Aloxaf/fzf-tab
 
 # ── fzf ───────────────────────────────────────────────────────────────────────
 

@@ -1,0 +1,28 @@
+# Copy to ~/.ssh/config and fill in your values.
+# chmod 600 ~/.ssh/config
+
+# ── Defaults ─────────────────────────────────────────────────────────────────
+Host *
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/id_ed25519
+
+# ── GPU server ───────────────────────────────────────────────────────────────
+Host gpu
+    HostName <server-ip-or-hostname>
+    User <your-username>
+    # Port forwarding for common ML tools (adjust ports as needed)
+    LocalForward 6006 localhost:6006   # TensorBoard
+    LocalForward 5000 localhost:5000   # MLflow
+    LocalForward 8888 localhost:8888   # Jupyter
+
+# ── Jump host (if server is behind a bastion) ────────────────────────────────
+# Host gpu
+#     HostName <internal-ip>
+#     User <your-username>
+#     ProxyJump bastion
+#
+# Host bastion
+#     HostName <bastion-ip>
+#     User <your-username>

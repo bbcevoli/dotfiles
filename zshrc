@@ -16,6 +16,7 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-history-substring-search
+  zsh-fzf-tab
   you-should-use
 )
 

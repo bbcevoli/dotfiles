@@ -12,6 +12,7 @@ alias ale='$EDITOR ~/dotfiles/aliases.sh'
 alias dotup='cd ~/dotfiles && git pull && bash install.sh && source ~/.zshrc'
 alias jp="jupyter lab"
 alias hn="hostname"
+alias mosh='mosh --predict=adaptive'    # smoother typing on laggy connections
 
 # -------------------------------------------------------------------
 # general
@@ -42,9 +43,14 @@ alias fdir='find . -type d -name'
 alias ff='find . -type f -name'
 alias which='type -a'
 alias grep='grep --color=auto'
+alias rg='rg --color=auto'
 alias psg='ps aux | grep'
 alias topcpu='ps aux --sort=-%cpu | head'
 alias topmem='ps aux --sort=-%mem | head'
+
+# modern replacements
+command -v bat  &>/dev/null && alias cat='bat --paging=never'
+command -v eza  &>/dev/null && alias ls='eza --group-directories-first' && alias ll='eza -l --group-directories-first' && alias la='eza -la' && alias lt='eza --tree'
 
 # storage
 alias du='du -kh'
@@ -146,6 +152,7 @@ alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
 alias gcam='git commit -am'
 alias gcane='git commit --amend --no-edit'
+alias gdw='git diff --word-diff'
 alias gundo='git reset --soft HEAD~1'
 alias gwip='git add -A && git commit -m "WIP"'
 alias gunwip='git reset HEAD~1'

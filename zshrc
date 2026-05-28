@@ -23,6 +23,10 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 source ~/aliases.sh
 
+# zsh-history-substring-search key bindings
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

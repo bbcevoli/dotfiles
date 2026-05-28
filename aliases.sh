@@ -3,8 +3,9 @@
 # -------------------------------------------------------------------
 
 alias cdg="cd ~/git"
-alias zrc="cd $DOT_DIR/zsh"
-alias dot="cd $DOT_DIR"
+alias dot="cd ~/dotfiles"
+alias zrce='$EDITOR ~/dotfiles/zshrc'
+alias ale='$EDITOR ~/dotfiles/aliases.sh'
 alias jp="jupyter lab"
 alias hn="hostname"
 
@@ -24,10 +25,13 @@ alias mkdir='mkdir -p'
 # find/read files
 alias h='head'
 alias t='tail'
+alias tf='tail -f'
 # alias rl="readlink -f"
-alias fd='find . -type d -name'
+alias fdir='find . -type d -name'
 alias ff='find . -type f -name'
 alias which='type -a'
+alias grep='grep --color=auto'
+alias psg='ps aux | grep'
 
 # storage
 alias du='du -kh' # file space
@@ -48,7 +52,8 @@ function add_to_path() {
 # cd
 #-------------------------------------------------------------
 
-alias c='cd'
+alias c='z'
+alias cd='z'
 alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
@@ -93,6 +98,7 @@ alias gl="git pull"
 
 alias grb="git rebase"
 alias grbm="git rebase master"
+alias grbmain="git rebase main"
 alias grbc="git rebase --continue"
 alias grbs="git rebase --skip"
 alias grba="git rebase --abort"
@@ -104,9 +110,10 @@ alias gs="git status"
 alias gco="git checkout"
 alias gcb="git checkout -b"
 alias gcm="git checkout master"
+alias gcmain="git checkout main"
 
 alias grhead="git reset HEAD^"
-alias grhard="git fetch origin && git reset --hard"
+alias grhard="git fetch origin && git reset --hard origin/$(git_current_branch)"
 
 alias gst="git stash"
 alias gstp="git stash pop"
@@ -116,6 +123,8 @@ alias gstc="git stash clear"
 
 alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
+alias gcam='git commit -am'
+alias gcane='git commit --amend --no-edit'
 
 #-------------------------------------------------------------
 # tmux
@@ -172,6 +181,21 @@ alias sv="source .venv/bin/activate"
 alias de="deactivate"
 alias ma="micromamba activate"
 alias md="micromamba deactivate"
+alias py="python3"
+
+# uv
+alias uvs="uv sync"
+alias uvr="uv run"
+alias uva="uv add"
+alias uvad="uv add --dev"
+alias uvrm="uv remove"
+
+#-------------------------------------------------------------
+# GPU
+#-------------------------------------------------------------
+alias gpu="nvidia-smi"
+alias gpuw="watch -n1 nvidia-smi"
+alias gpumem="nvidia-smi --query-gpu=index,memory.used,memory.free --format=csv"
 
 # -------------------------------------------------------------------
 # Slurm

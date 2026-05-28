@@ -12,6 +12,7 @@ plugins=(
   docker
   python
   gh
+  uv
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-history-substring-search

@@ -18,6 +18,13 @@ alias hn="hostname"
 # -------------------------------------------------------------------
 
 alias cl="clear"
+alias reload='source ~/.zshrc'
+alias serve='python3 -m http.server'
+alias myip='curl -s ifconfig.me'
+alias localip='ipconfig getifaddr en0 2>/dev/null || hostname -I | awk "{print \$1}"'
+alias watch='watch -n1'
+alias json='python3 -m json.tool'
+alias largest='find . -type f -printf "%s %p\n" | sort -rn | head -20'
 
 # file and directories
 alias rm='rm -i'
@@ -139,6 +146,11 @@ alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
 alias gcam='git commit -am'
 alias gcane='git commit --amend --no-edit'
+alias gundo='git reset --soft HEAD~1'
+alias gwip='git add -A && git commit -m "WIP"'
+alias gunwip='git reset HEAD~1'
+alias gclean='git clean -fd'
+alias gcl='git clone --depth=1'
 
 #-------------------------------------------------------------
 # tmux
@@ -207,6 +219,17 @@ alias uvr="uv run"
 alias uva="uv add"
 alias uvad="uv add --dev"
 alias uvrm="uv remove"
+
+#-------------------------------------------------------------
+# docker
+#-------------------------------------------------------------
+alias dk='docker'
+alias dkps='docker ps'
+alias dkpsa='docker ps -a'
+alias dkrm='docker rm $(docker ps -aq)'
+alias dkrmi='docker rmi $(docker images -q)'
+alias dklog='docker logs -f'
+alias dksh='docker exec -it'
 
 #-------------------------------------------------------------
 # GPU

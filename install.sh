@@ -31,6 +31,8 @@ symlink gitconfig    .gitconfig
 symlink tmux.conf    .tmux.conf
 symlink inputrc      .inputrc
 
+if command -v zsh &>/dev/null; then
+
 # ── Oh My Zsh ─────────────────────────────────────────────────────────────────
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -92,9 +94,11 @@ else
     skip "zoxide already installed"
 fi
 
-# ── Bash fallback (when zsh is not available) ─────────────────────────────────
+else
+    skip "zsh not found — skipping zsh plugins, fzf, zoxide"
 
-if ! command -v zsh &>/dev/null; then
+# ── Bash fallback ─────────────────────────────────────────────────────────────
+
     BASHRC="$HOME/.bashrc"
     MARKER="# dotfiles"
     if ! grep -q "$MARKER" "$BASHRC" 2>/dev/null; then
@@ -103,6 +107,7 @@ if ! command -v zsh &>/dev/null; then
     else
         skip "aliases already in .bashrc"
     fi
+
 fi
 
 echo ""

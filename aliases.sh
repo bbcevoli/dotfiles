@@ -2,6 +2,9 @@
 # personal
 # -------------------------------------------------------------------
 
+# path
+alias path='echo $PATH | tr ":" "\n"'
+
 alias cdg="cd ~/git"
 alias dot="cd ~/dotfiles"
 alias zrce='$EDITOR ~/dotfiles/zshrc'
@@ -32,12 +35,22 @@ alias ff='find . -type f -name'
 alias which='type -a'
 alias grep='grep --color=auto'
 alias psg='ps aux | grep'
+alias topcpu='ps aux --sort=-%cpu | head'
+alias topmem='ps aux --sort=-%mem | head'
 
 # storage
-alias du='du -kh' # file space
-alias df='df -kTh' # disk space
+alias du='du -kh'
+alias df='df -kTh'
 alias usage='du -sh * 2>/dev/null | sort -rh'
 alias dus='du -sckx * | sort -nr'
+alias sz='du -sh'
+alias diskw='watch -n5 df -h'
+alias ports='ss -tulnp'
+
+# archives
+alias untar='tar -xvf'
+alias targz='tar -czf'
+alias untargz='tar -xzf'
 
 # add to path
 function add_to_path() {
@@ -130,6 +143,8 @@ alias gcane='git commit --amend --no-edit'
 # tmux
 #-------------------------------------------------------------
 
+alias tmux='tmux -u'
+alias tks='tmux kill-server'
 alias ta="tmux attach"
 alias taa="tmux attach -t"
 alias tad="tmux attach -d -t"
@@ -182,6 +197,8 @@ alias de="deactivate"
 alias ma="micromamba activate"
 alias md="micromamba deactivate"
 alias py="python3"
+alias tb='tensorboard --logdir'
+alias nb='jupyter nbconvert --to script'
 
 # uv
 alias uvs="uv sync"

@@ -79,8 +79,7 @@ function add_to_path() {
 # cd
 #-------------------------------------------------------------
 
-alias c='z'
-alias cd='z'
+command -v zoxide &>/dev/null && alias c='z' && alias cd='z'
 alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
@@ -105,6 +104,9 @@ alias 9='cd -9'
 #-------------------------------------------------------------
 # git
 #-------------------------------------------------------------
+
+# oh-my-zsh provides this; define a fallback for bash
+type git_current_branch &>/dev/null 2>&1 || git_current_branch() { git symbolic-ref --short HEAD 2>/dev/null; }
 
 alias g="git"
 alias gcl="git clone"
@@ -140,7 +142,7 @@ alias gcm="git checkout master"
 alias gcmain="git checkout main"
 
 alias grhead="git reset HEAD^"
-alias grhard="git fetch origin && git reset --hard origin/$(git_current_branch)"
+alias grhard='git fetch origin && git reset --hard origin/$(git_current_branch)'
 
 alias gst="git stash"
 alias gstp="git stash pop"

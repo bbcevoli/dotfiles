@@ -9,6 +9,7 @@ alias cdg="cd ~/git"
 alias dot="cd ~/dotfiles"
 alias zrce='$EDITOR ~/dotfiles/zshrc'
 alias ale='$EDITOR ~/dotfiles/aliases.sh'
+alias dotup='cd ~/dotfiles && git pull && bash install.sh && source ~/.zshrc'
 alias jp="jupyter lab"
 alias hn="hostname"
 

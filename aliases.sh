@@ -19,7 +19,7 @@ alias mosh='mosh --predict=adaptive'    # smoother typing on laggy connections
 # -------------------------------------------------------------------
 
 alias cl="clear"
-alias reload='source ~/.zshrc'
+[ -n "$ZSH_VERSION" ] && alias reload='source ~/.zshrc' || alias reload='source ~/.bashrc'
 alias serve='python3 -m http.server'
 alias myip='curl -s ifconfig.me'
 alias localip='ipconfig getifaddr en0 2>/dev/null || hostname -I | awk "{print \$1}"'
@@ -87,18 +87,19 @@ alias .2='cd ../../'
 alias .3='cd ../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
-alias /='cd /'
-
-alias d='dirs -v'
-alias 1='cd -1'
-alias 2='cd -2'
-alias 3='cd -3'
-alias 4='cd -4'
-alias 5='cd -5'
-alias 6='cd -6'
-alias 7='cd -7'
-alias 8='cd -8'
-alias 9='cd -9'
+if [ -n "$ZSH_VERSION" ]; then
+  alias /='cd /'
+  alias d='dirs -v'
+  alias 1='cd -1'
+  alias 2='cd -2'
+  alias 3='cd -3'
+  alias 4='cd -4'
+  alias 5='cd -5'
+  alias 6='cd -6'
+  alias 7='cd -7'
+  alias 8='cd -8'
+  alias 9='cd -9'
+fi
 
 
 #-------------------------------------------------------------

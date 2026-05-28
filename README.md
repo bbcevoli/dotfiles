@@ -5,7 +5,7 @@ Personal shell configuration for macOS and Linux servers.
 ## Install
 
 ```bash
-git clone https://github.com/bcevoli/dotfiles ~/dotfiles
+git clone https://github.com/bbcevoli/dotfiles ~/dotfiles
 cd ~/dotfiles
 bash install.sh
 ```

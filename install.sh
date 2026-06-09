@@ -83,7 +83,18 @@ if [ ! -d "$HOME/.fzf" ]; then
     info "Installing fzf"
     cp -r "$VENDOR/fzf" "$HOME/.fzf"
     chmod +x "$HOME/.fzf/bin/fzf"
-    "$HOME/.fzf/install" --all --no-update-rc
+    # Write shell integration files directly — avoids fzf's install script
+    # which tries to run the binary to verify it (fails cross-platform).
+    cat > "$HOME/.fzf.zsh" << 'EOF'
+# fzf
+[[ ":$PATH:" != *":$HOME/.fzf/bin:"* ]] && PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
+source <(fzf --zsh)
+EOF
+    cat > "$HOME/.fzf.bash" << 'EOF'
+# fzf
+[[ ":$PATH:" != *":$HOME/.fzf/bin:"* ]] && PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
+eval "$(fzf --bash)"
+EOF
     success "fzf installed"
 else
     skip "fzf already installed"

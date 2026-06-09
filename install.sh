@@ -1,10 +1,12 @@
 #!/bin/bash
 # Dotfiles installer — symlinks configs and installs plugins.
 # Safe to re-run: skips anything already done.
+# This branch (offline) uses vendor/ instead of cloning from GitHub.
 
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+VENDOR="$DOTFILES/vendor"
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
 info()    { echo "  [·] $*"; }
@@ -37,7 +39,7 @@ if command -v zsh &>/dev/null; then
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     info "Installing Oh My Zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    cp -r "$VENDOR/oh-my-zsh" "$HOME/.oh-my-zsh"
     success "Oh My Zsh installed"
 else
     skip "Oh My Zsh already installed"
@@ -47,7 +49,8 @@ fi
 
 if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
     info "Installing Powerlevel10k"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k "$ZSH_CUSTOM/themes/powerlevel10k"
+    mkdir -p "$ZSH_CUSTOM/themes"
+    cp -r "$VENDOR/themes/powerlevel10k" "$ZSH_CUSTOM/themes/powerlevel10k"
     success "Powerlevel10k installed"
 else
     skip "Powerlevel10k already installed"
@@ -56,46 +59,38 @@ fi
 # ── Zsh plugins ───────────────────────────────────────────────────────────────
 
 install_plugin() {
-    local name="$1" repo="$2"
+    local name="$1"
     local dir="$ZSH_CUSTOM/plugins/$name"
     if [ ! -d "$dir" ]; then
         info "Installing $name"
-        git clone --depth=1 "$repo" "$dir"
+        mkdir -p "$ZSH_CUSTOM/plugins"
+        cp -r "$VENDOR/plugins/$name" "$dir"
         success "$name installed"
     else
         skip "$name already installed"
     fi
 }
 
-install_plugin zsh-autosuggestions      https://github.com/zsh-users/zsh-autosuggestions
-install_plugin zsh-syntax-highlighting  https://github.com/zsh-users/zsh-syntax-highlighting
-install_plugin zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search
-install_plugin you-should-use           https://github.com/MichaelAquilina/zsh-you-should-use
-install_plugin fzf-tab                  https://github.com/Aloxaf/fzf-tab
+install_plugin zsh-autosuggestions
+install_plugin zsh-syntax-highlighting
+install_plugin zsh-history-substring-search
+install_plugin you-should-use
+install_plugin fzf-tab
 
 # ── fzf ───────────────────────────────────────────────────────────────────────
 
 if [ ! -d "$HOME/.fzf" ]; then
     info "Installing fzf"
-    git clone --depth=1 https://github.com/junegunn/fzf "$HOME/.fzf"
+    cp -r "$VENDOR/fzf" "$HOME/.fzf"
+    chmod +x "$HOME/.fzf/bin/fzf"
     "$HOME/.fzf/install" --all --no-update-rc
     success "fzf installed"
 else
     skip "fzf already installed"
 fi
 
-# ── zoxide ────────────────────────────────────────────────────────────────────
-
-if ! command -v zoxide &>/dev/null; then
-    info "Installing zoxide"
-    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-    success "zoxide installed"
 else
-    skip "zoxide already installed"
-fi
-
-else
-    skip "zsh not found — skipping zsh plugins, fzf, zoxide"
+    skip "zsh not found — skipping zsh plugins, fzf"
 
 # ── Bash fallback ─────────────────────────────────────────────────────────────
 
@@ -112,3 +107,4 @@ fi
 
 echo ""
 echo "Done. Restart your shell or run: source ~/.zshrc (zsh) / source ~/.bashrc (bash)"
+echo "Note: zoxide was not installed. Add it via your package manager if needed (apt/brew/etc)."
